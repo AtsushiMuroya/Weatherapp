@@ -120,10 +120,18 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
         String str1 = "Latitude:"+location.getLatitude();
         textView1.setText(str1);
 
+
         // 経度の表示
         TextView textView2 = (TextView) findViewById(R.id.textView2);
         String str2 = "Longtude:"+location.getLongitude();
         textView2.setText(str2);
+
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.putExtra("Lat",latitude);
+        intent.putExtra("Lon",longitude);
+        startActivity(intent);
     }
 
     @Override
