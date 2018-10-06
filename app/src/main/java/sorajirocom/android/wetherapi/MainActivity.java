@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView latText;
     TextView lonText;
+    double lat;
+    double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         lonText = (TextView)findViewById(R.id.textView3);
 
         Intent intent = getIntent();
-        double lat = intent.getDoubleExtra("Lat",0);
-        double lon = intent.getDoubleExtra("Lon",0);
+        lat = intent.getDoubleExtra("Lat",0);
+        lon = intent.getDoubleExtra("Lon",0);
         latText.setText(Double.toString(lat));
         lonText.setText(Double.toString(lon));
 
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void fivedays(View v){
         Intent intent = new Intent(this,FivedaysActivity.class);
+        intent.putExtra("Lat",lat);
+        intent.putExtra("Lon",lon);
         startActivity(intent);
     }
 }

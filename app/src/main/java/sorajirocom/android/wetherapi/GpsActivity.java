@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class GpsActivity extends AppCompatActivity implements LocationListener {
     LocationManager locationManager;
-    Location location;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
