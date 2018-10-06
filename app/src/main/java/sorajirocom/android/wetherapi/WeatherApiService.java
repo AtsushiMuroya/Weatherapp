@@ -8,8 +8,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface WeatherApiService {
-    @GET("/data/2.5/weather")
-    Call<WeatherGsonResponse> getData(@Query("q") String place, @Query ("appid") String key);
+    @GET("/data/2.5/find")
+    Call<List<WeatherGsonResponse>> getData(@Query("lat") double lat,@Query("lon") double lon, @Query("cnt") int cnt,@Query ("APPID") String key);
 }
 
 

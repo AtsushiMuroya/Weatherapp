@@ -33,21 +33,21 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
         else{
             locationStart();
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50, this);
+            //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 50, this);
 
         }
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("Lat",latitude);
-                intent.putExtra("Lon",longitude);
-                startActivity(intent);
-            }
-        });
+//        Button button = (Button)findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                double latitude = location.getLatitude();
+//                double longitude = location.getLongitude();
+//                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                intent.putExtra("Lat",latitude);
+//                intent.putExtra("Lon",longitude);
+//                startActivity(intent);
+//            }
+//        });
     }
     private void locationStart(){
         Log.d("debug","locationStart()");
@@ -56,7 +56,7 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
         locationManager =
                 (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        if (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if (locationManager != null && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             Log.d("debug", "location manager Enabled");
         } else {
             // GPSを設定するように促す
@@ -76,7 +76,7 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
             return;
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,this);
 
     }
     @Override
@@ -115,16 +115,17 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Log.d("debug","OK");
+        Toast.makeText(this,"場所がわかったよ",Toast.LENGTH_SHORT).show();
         // 緯度の表示
-        TextView textView1 = (TextView) findViewById(R.id.textView);
-        String str1 = "Latitude:"+location.getLatitude();
-        textView1.setText(str1);
-
-
-        // 経度の表示
-        TextView textView2 = (TextView) findViewById(R.id.textView2);
-        String str2 = "Longtude:"+location.getLongitude();
-        textView2.setText(str2);
+//        TextView textView1 = (TextView) findViewById(R.id.textView);
+//        String str1 = "Latitude:"+location.getLatitude();
+//        textView1.setText(str1);
+//
+//
+//        // 経度の表示
+//        TextView textView2 = (TextView) findViewById(R.id.textView2);
+//        String str2 = "Longtude:"+location.getLongitude();
+//        textView2.setText(str2);
 
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,22 +36,23 @@ public class MainActivity extends AppCompatActivity {
         lonText.setText(Double.toString(lon));
 
         //Apiの使用
+        //lat="+lat+"&lon="+lon+"&cnt=1&APPID=05ef9e0937cc2befa00b875b2100a4dd
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://samples.openweathermap.org")
+                .baseUrl("http://api.openweathermap.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         WeatherApiService weatherApiservice = retrofit.create(WeatherApiService.class);
-        Call<WeatherGsonResponse> call = weatherApiservice.getData("","05ef9e0937cc2befa00b875b2100a4dd");
+        Call<List<WeatherGsonResponse>> call = weatherApiservice.getData(lat,lon,14,"05ef9e0937cc2befa00b875b2100a4dd");
         try {
-            call.enqueue(new Callback<WeatherGsonResponse>() {
+            call.enqueue(new Callback<List<WeatherGsonResponse>>() {
                 @Override
-                public void onResponse(Call<WeatherGsonResponse> call, Response<WeatherGsonResponse> response) {
+                public void onResponse(Call<List<WeatherGsonResponse>> call, Response<List<WeatherGsonResponse>> response) {
                     if(response.body() != null){
-                        String weather = response.body().getWeather().get(0).getMain();
+                        String weather = response.body().get(0).getWeather();
                         Log.d("Weather",weather);
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
-                        textView.setText(weather);
+                        textView.setText("今日の天気は"+ weather);
                     }
 
 
@@ -65,5 +67,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("Weather", "レスポンスエラー");
         }
+    }
+    public void fivedays(View v){
+        Intent intent = new Intent(this,FivedaysActivity.class);
+        startActivity(intent);
     }
 }
