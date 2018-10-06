@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView latText;
     TextView lonText;
+    TextView timeText;
     double lat;
     double lon;
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.textView);
         latText = (TextView)findViewById(R.id.textView2);
         lonText = (TextView)findViewById(R.id.textView3);
+        timeText = (TextView)findViewById(R.id.timeText);
 
         Intent intent = getIntent();
         lat = intent.getDoubleExtra("Lat",0);
@@ -40,28 +41,32 @@ public class MainActivity extends AppCompatActivity {
         //Apiの使用
         //lat="+lat+"&lon="+lon+"&cnt=1&APPID=05ef9e0937cc2befa00b875b2100a4dd
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/")
+                .baseUrl("https://api.openweathermap.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         WeatherApiService weatherApiservice = retrofit.create(WeatherApiService.class);
-        Call<List<WeatherGsonResponse>> call = weatherApiservice.getData(lat,lon,14,"05ef9e0937cc2befa00b875b2100a4dd");
+        Call<Example> call = weatherApiservice.getData(lat,lon,"05ef9e0937cc2befa00b875b2100a4dd");
         try {
-            call.enqueue(new Callback<List<WeatherGsonResponse>>() {
+            call.enqueue(new Callback<Example>() {
                 @Override
-                public void onResponse(Call<List<WeatherGsonResponse>> call, Response<List<WeatherGsonResponse>> response) {
+                public void onResponse(Call<Example> call, Response<Example> response) {
                     if(response.body() != null){
-                        String weather = response.body().get(0).getWeather();
-                        Log.d("Weather",weather);
+                        //ListResponse weather = response.body().getListResponse().get(0).getWeather();
+                        String tenki = response.body().getListResponse().get(0).getWeather().get(0).getMain();
+                        int clouds = response.body().getListResponse().get(0).getClouds().getAll();
+                        String time = response.body().getListResponse().get(0).getDtTxt();
+                        Log.d("Weather",time);
+                        timeText.setText(time);
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
-                        textView.setText("今日の天気は"+ weather);
+                        textView.setText("今日の天気は"+ tenki);
                     }
 
 
                 }
 
                 @Override
-                public void onFailure(Call<WeatherGsonResponse> call, Throwable t) {
+                public void onFailure(Call<Example> call, Throwable t) {
                     Log.d("Weather", "error");
                 }
 

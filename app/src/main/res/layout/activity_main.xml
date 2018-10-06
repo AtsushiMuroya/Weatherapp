@@ -16,7 +16,7 @@
         android:layout_marginTop="53dp"
         android:text="今日の天気は？"
         android:textColor="@android:color/background_dark"
-        android:textSize="48sp" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -54,6 +54,18 @@
         android:layout_marginBottom="48dp"
         android:layout_marginStart="41dp"
         android:background="@color/colorPrimary"
+        android:onClick="fivedays"
         android:text="五日間の天気は？" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="234dp"
+        android:text="TextView"
+        android:textSize="36sp" />
 
 </RelativeLayout>
