@@ -17,8 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
-    TextView latText;
-    TextView lonText;
+//    TextView latText;
+//    TextView lonText;
     TextView timeText;
     double lat;
     double lon;
@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.textView);
-        latText = (TextView)findViewById(R.id.textView2);
-        lonText = (TextView)findViewById(R.id.textView3);
+//        latText = (TextView)findViewById(R.id.textView2);
+//        lonText = (TextView)findViewById(R.id.textView3);
         timeText = (TextView)findViewById(R.id.timeText);
 
         Intent intent = getIntent();
         lat = intent.getDoubleExtra("Lat",0);
         lon = intent.getDoubleExtra("Lon",0);
-        latText.setText(Double.toString(lat));
-        lonText.setText(Double.toString(lon));
+//        latText.setText(Double.toString(lat));
+//        lonText.setText(Double.toString(lon));
 
         //Apiの使用
         //lat="+lat+"&lon="+lon+"&cnt=1&APPID=05ef9e0937cc2befa00b875b2100a4dd
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("Weather",time);
                         timeText.setText(time);
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
-                        textView.setText("今日の天気は"+ tenki);
+                        textView.setText(tenki);
                     }
 
 

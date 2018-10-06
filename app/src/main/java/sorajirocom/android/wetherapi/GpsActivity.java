@@ -133,6 +133,7 @@ public class GpsActivity extends AppCompatActivity implements LocationListener {
         intent.putExtra("Lat",latitude);
         intent.putExtra("Lon",longitude);
         startActivity(intent);
+
     }
 
     @Override
