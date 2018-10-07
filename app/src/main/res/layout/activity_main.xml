@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="106dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="110dp"
         android:text="天気は？"
         android:textColor="@android:color/background_dark"
         android:textSize="60sp" />
@@ -25,7 +25,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:onClick="fivedays"
-        app:srcCompat="@drawable/sorajirovoice" />
+        app:srcCompat="@drawable/sorajirovoice2" />
 
     <Button
         android:id="@+id/button3"
@@ -33,11 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="87dp"
         android:layout_marginStart="41dp"
         android:background="@color/colorPrimary"
         android:onClick="fivedays"
-        android:text="五日間の天気は？" />
+        android:text="週間天気！" />
 
     <TextView
         android:id="@+id/timeText"
